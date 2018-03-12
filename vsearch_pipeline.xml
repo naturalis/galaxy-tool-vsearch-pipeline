@@ -1,0 +1,41 @@
+<tool id="vsearch pipeline" name="Vsearch pipeline">
+<description>Make an otu table with vsearch tools (TEST VERSION, STILL UNDER DEVELOPMENT)</description>
+<command interpreter="bash">
+vsearch_pipeline.sh 
+$input 
+$type
+$cluster_id
+$cluster_size
+$log
+$otu_table
+$otu_seqs
+</command>
+
+<inputs>
+<param format="zip" name="input" type="data" label="zip file containing fasta or fastq files"/>
+
+				<param name="type" type="select" multiple="false" label="Input type">
+					<option value="FASTA">fasta</option>
+					<option value="FASTQ" selected="true">fastq</option>
+				</param>
+				<param name="cluster_id" type="float" label="Cluster id" value="0.97" min="0.1" max="1"/>
+				<param name="cluster_size" type="integer" label="Minimal cluster size" value="2" min="0" max="999"/>
+				
+</inputs>
+
+	
+<outputs>
+	<data format="txt" type="data" name="log" label="$input.display_name log" />
+	<data format="tabular" type="data" name="otu_table" label="$input.display_name otu_table" />
+	<data format="fasta" type="data" name="otu_seqs" label="$input.display_name otu_table" />
+</outputs>
+<tests>
+<test>
+<param name="test_input" value="test_input.txt"/>
+<output name="test_outout" file="test_output.txt"/>
+</test>
+</tests>
+<help>
+Pipeline for making otu tables
+</help>
+</tool>
